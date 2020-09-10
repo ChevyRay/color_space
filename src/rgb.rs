@@ -1,6 +1,6 @@
 use crate::{ FromRgb, ToRgb };
 
-#[derive(Copy, Clone, Debug, Default)]
+#[derive(Copy, Clone, Debug, Default, PartialEq)]
 pub struct Rgb {
     pub r: f64,
     pub g: f64,

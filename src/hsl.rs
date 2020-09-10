@@ -1,6 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb };
 
-#[derive(Copy, Clone, Debug, Default)]
+#[derive(Copy, Clone, Debug, Default, PartialEq)]
 pub struct Hsl {
     pub h: f64,
     pub s: f64,

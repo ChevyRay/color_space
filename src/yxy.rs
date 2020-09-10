@@ -1,6 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, Xyz };
 
-#[derive(Copy, Clone, Debug, Default)]
+#[derive(Copy, Clone, Debug, Default, PartialEq)]
 pub struct Yxy {
     pub y1: f64,
     pub x: f64,

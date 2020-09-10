@@ -1,10 +1,19 @@
-use crate::{ FromRgb, ToRgb, FromColor, Lab, Lch };
+use crate::{ ToRgb, FromColor, Lab, Lch };
 use std::f64::consts::PI;
 
-pub trait Compare<T: ToRgb> {
+pub trait CompareEuclidean<T> {
     fn compare_euclidean(&self, color: &T) -> f64;
+}
+
+pub trait CompareCie1976<T> {
     fn compare_cie1976(&self, color: &T) -> f64;
+}
+
+pub trait CompareCie2000<T> {
     fn compare_cie2000(&self, color: &T) -> f64;
+}
+
+pub trait CompareCmc<T> {
     fn compare_cmc(&self, color: &T) -> f64;
 }
 
@@ -28,8 +37,8 @@ fn rad_to_deg(rad: f64) -> f64 {
     (rad * 180.0) / PI
 }
 
-impl<T: ToRgb, U: ToRgb + FromRgb> Compare<T> for U {
-    fn compare_euclidean(&self, color: &T) -> f64 {
+impl<T: ToRgb, U: ToRgb> CompareEuclidean<U> for T {
+    fn compare_euclidean(&self, color: &U) -> f64 {
         let a = self.to_rgb();
         let b = color.to_rgb();
         (
@@ -38,7 +47,16 @@ impl<T: ToRgb, U: ToRgb + FromRgb> Compare<T> for U {
             (a.b - b.b) * (a.b - b.b)
         ).sqrt()
     }
-    fn compare_cie1976(&self, color: &T) -> f64 {
+}
+
+impl<T, U> CompareCie1976<U> for T
+where
+    T: ToRgb,
+    U: ToRgb,
+    Lab: FromColor<T>,
+    Lab: FromColor<U>,
+{
+    fn compare_cie1976(&self, color: &U) -> f64 {
         let a = Lab::from_color(self);
         let b = Lab::from_color(color);
         (
@@ -47,8 +65,16 @@ impl<T: ToRgb, U: ToRgb + FromRgb> Compare<T> for U {
             (a.b - b.b) * (a.b - b.b)
         ).sqrt()
     }
-    fn compare_cie2000(&self, color: &T) -> f64 {
+}
 
+impl<T, U> CompareCie2000<U> for T
+where
+    T: ToRgb,
+    U: ToRgb,
+    Lab: FromColor<T>,
+    Lab: FromColor<U>,
+{
+    fn compare_cie2000(&self, color: &U) -> f64 {
         let eps: f64 = 1e-5;
         let pi2 = PI * 2.0;
 
@@ -113,7 +139,16 @@ impl<T: ToRgb, U: ToRgb + FromRgb> Compare<T> for U {
             rt * delta_c / sc * delta_h / sh
         ).sqrt()
     }
-    fn compare_cmc(&self, color: &T) -> f64 {
+}
+
+impl<T, U> CompareCmc<U> for T
+where
+    T: ToRgb,
+    U: ToRgb,
+    Lch: FromColor<T>,
+    Lch: FromColor<U>,
+{
+    fn compare_cmc(&self, color: &U) -> f64 {
         let lch_a = Lch::from_color(self);
         let lch_b = Lch::from_color(color);
 

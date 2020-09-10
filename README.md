@@ -11,7 +11,7 @@ let hsv = Hsv::from(rgb);
 assert_eq!(hsv, Hsv::new(120.0, 1.0, 1.0));
 ```
 
-If you prefer to do it by reference, you can use the `from_color` method:
+You can also do this generically with the `from_color` method:
 ```rust
 let rgb = Rgb::new(0.0, 0.0, 255.0);
 let hsv = Hsv::from_color(&rgb);

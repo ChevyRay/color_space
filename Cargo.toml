@@ -3,5 +3,11 @@ name = "color_space"
 version = "0.1.0"
 authors = ["Chevy Ray Johnston <happytrash@gmail.com>"]
 edition = "2018"
+description = "library for converting between color spaces and comparing colors"
+readme = "README.md"
+repository = "https://github.com/ChevyRay/color_space"
+license = "MIT"
+keywords = ["color", "rgb", "hsv", "lab", "hsl"]
+categories = ["algorithms", "graphics"]
 
 [dependencies]

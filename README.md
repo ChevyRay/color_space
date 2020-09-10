@@ -1,7 +1,7 @@
 # color_space
 A Rust library for converting between color spaces and comparing colors, ported from https://github.com/berendeanicolae/ColorSpace.
 
-**WARNING:** This has not been extensively tested yet, it's simply been ported, but there could still be some errors in my ported code for certain conversions. Until version `1.0.0`, which will be stable, use at your own discretion.
+**WARNING:** This has not been extensively tested yet, it's simply been ported. There could still be some errors in my ported code for certain conversions. Until version `1.0.0`, which will be stable, use at your own discretion.
 
 ## Color Conversion
 You can convert between any supported color spaces using the `from` trait method:

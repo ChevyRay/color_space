@@ -1,6 +1,6 @@
-use crate::{ Rgb, FromRgb, ToRgb };
+use crate::{ Rgb, FromRgb, ToRgb, approx };
 
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct Hsv {
     pub h: f64,
     pub s: f64,
@@ -10,6 +10,14 @@ pub struct Hsv {
 impl Hsv {
     pub fn new(h: f64, s: f64, v: f64) -> Self {
         Self { h, s, v }
+    }
+}
+
+impl PartialEq for Hsv {
+    fn eq(&self, other: &Self) -> bool {
+        approx(self.h, other.h) &&
+        approx(self.s, other.s) &&
+        approx(self.v, other.v)
     }
 }
 

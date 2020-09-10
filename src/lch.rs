@@ -1,7 +1,7 @@
-use crate::{ Rgb, FromRgb, ToRgb, Lab };
+use crate::{ Rgb, FromRgb, ToRgb, Lab, approx };
 use std::f64::consts::PI;
 
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct Lch {
     pub l: f64,
     pub c: f64,
@@ -14,13 +14,20 @@ impl Lch {
     }
 }
 
+impl PartialEq for Lch {
+    fn eq(&self, other: &Self) -> bool {
+        approx(self.l, other.l) &&
+        approx(self.c, other.c) &&
+        approx(self.h, other.h)
+    }
+}
+
 impl FromRgb for Lch {
     fn from_rgb(rgb: &Rgb) -> Self {
         let lab = Lab::from_rgb(rgb);
-        let l = lab.l;
         let c = (lab.a * lab.a + lab.b * lab.b).sqrt();
-        let h = (lab.b.atan2(lab.a) / PI) * 180.0;
-        Self::new(l, c, (h + 360.0) % 360.0)
+        let h = lab.b.atan2(lab.a) * (180.0 / PI);
+        Self::new(lab.l, c, (h + 360.0) % 360.0)
     }
 }
 

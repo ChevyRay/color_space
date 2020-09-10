@@ -1,6 +1,6 @@
-use crate::{ Rgb, FromRgb, ToRgb, Xyz };
+use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
 
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct HunterLab {
     pub l: f64,
     pub a: f64,
@@ -10,6 +10,14 @@ pub struct HunterLab {
 impl HunterLab {
     pub fn new(l: f64, a: f64, b: f64) -> Self {
         Self { l, a, b }
+    }
+}
+
+impl PartialEq for HunterLab {
+    fn eq(&self, other: &Self) -> bool {
+        approx(self.l, other.l) &&
+        approx(self.a, other.a) &&
+        approx(self.b, other.b)
     }
 }
 

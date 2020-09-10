@@ -1,6 +1,6 @@
-use crate::{ Rgb, FromRgb, ToRgb, Xyz };
+use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
 
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct Luv {
     pub l: f64,
     pub u: f64,
@@ -10,6 +10,14 @@ pub struct Luv {
 impl Luv {
     pub fn new(l: f64, u: f64, v: f64) -> Self {
         Self { l, u, v }
+    }
+}
+
+impl PartialEq for Luv {
+    fn eq(&self, other: &Self) -> bool {
+        approx(self.l, other.l) &&
+        approx(self.u, other.u) &&
+        approx(self.v, other.v)
     }
 }
 

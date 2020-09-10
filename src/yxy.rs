@@ -1,6 +1,6 @@
-use crate::{ Rgb, FromRgb, ToRgb, Xyz };
+use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
 
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct Yxy {
     pub y1: f64,
     pub x: f64,
@@ -10,6 +10,14 @@ pub struct Yxy {
 impl Yxy {
     pub fn new(y1: f64, x: f64, y2: f64) -> Self {
         Self { y1, x, y2 }
+    }
+}
+
+impl PartialEq for Yxy {
+    fn eq(&self, other: &Self) -> bool {
+        approx(self.y1, other.y1) &&
+        approx(self.x, other.x) &&
+        approx(self.y2, other.y2)
     }
 }
 

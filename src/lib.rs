@@ -9,6 +9,7 @@ mod luv;
 mod rgb;
 mod xyz;
 mod yxy;
+mod approx;
 mod compare;
 
 pub use cmy::Cmy;
@@ -22,6 +23,7 @@ pub use luv::Luv;
 pub use rgb::Rgb;
 pub use xyz::Xyz;
 pub use yxy::Yxy;
+pub use approx::approx;
 pub use compare::{ CompareEuclidean, CompareCie1976, CompareCie2000, CompareCmc };
 
 pub trait FromRgb {

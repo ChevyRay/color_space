@@ -1,6 +1,6 @@
-use crate::{ Rgb, FromRgb, ToRgb };
+use crate::{ Rgb, FromRgb, ToRgb, approx };
 
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct Cmy {
     pub c: f64,
     pub m: f64,
@@ -10,6 +10,14 @@ pub struct Cmy {
 impl Cmy {
     pub fn new(c: f64, m: f64, y: f64) -> Self {
         Self { c, m, y }
+    }
+}
+
+impl PartialEq for Cmy {
+    fn eq(&self, other: &Self) -> bool {
+        approx(self.c, other.c) &&
+        approx(self.m, other.m) &&
+        approx(self.y, other.y)
     }
 }
 

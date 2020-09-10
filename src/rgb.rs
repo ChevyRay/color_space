@@ -1,6 +1,6 @@
-use crate::{ FromRgb, ToRgb };
+use crate::{ FromRgb, ToRgb, approx };
 
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
+#[derive(Copy, Clone, Debug, Default)]
 pub struct Rgb {
     pub r: f64,
     pub g: f64,
@@ -17,6 +17,14 @@ impl Rgb {
             g: (((hex >> 8) & 0xff) as f64) / 255.0,
             b: ((hex & 0xff) as f64) / 255.0,
         }
+    }
+}
+
+impl PartialEq for Rgb {
+    fn eq(&self, other: &Self) -> bool {
+        approx(self.r, other.r) &&
+        approx(self.g, other.g) &&
+        approx(self.b, other.b)
     }
 }
 

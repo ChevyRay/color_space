@@ -68,11 +68,3 @@ impl_from!(Luv, Rgb, Xyz, Yxy, Cmy, Cmyk, Hsl, Hsv, HunterLab, Lab, Lch);
 impl_from!(Rgb, Xyz, Yxy, Cmy, Cmyk, Hsl, Hsv, HunterLab, Lab, Lch, Luv);
 impl_from!(Xyz, Yxy, Cmy, Cmyk, Hsl, Hsv, HunterLab, Lab, Lch, Luv, Rgb);
 impl_from!(Yxy, Cmy, Cmyk, Hsl, Hsv, HunterLab, Lab, Lch, Luv, Rgb, Xyz);
-
-#[test]
-fn tests() {
-    let col1 = Rgb::new(255.0, 0.0, 0.0);
-    let col2 = Hsv::new(0.0, 1.0, 1.0);
-    let diff = col1.compare_cie2000(&col2);
-    assert_eq!(diff, 0.0);
-}

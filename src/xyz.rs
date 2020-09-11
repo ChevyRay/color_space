@@ -1,6 +1,7 @@
 use crate::{ FromRgb, ToRgb, approx };
 use crate::rgb::Rgb;
 
+/// A CIE 1931 XYZ color.
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Xyz {
     pub x: f64,

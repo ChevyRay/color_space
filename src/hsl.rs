@@ -1,5 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, approx };
 
+/// An HSL color (hue, saturation, light).
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Hsl {
     pub h: f64,
@@ -8,6 +9,13 @@ pub struct Hsl {
 }
 
 impl Hsl {
+    /// Create a new HSL color.
+    /// 
+    /// `h`: hue component (0 to 360)
+    /// 
+    /// `s`: saturation component (0 to 100)
+    /// 
+    /// `l`: light component (0 to 100)
     pub fn new(h: f64, s: f64, l: f64) -> Self {
         Self { h, s, l }
     }

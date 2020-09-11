@@ -1,5 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, Cmy, approx };
 
+/// A CMYK color (cyan, magenta, yellow, key).
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Cmyk {
     pub c: f64,
@@ -9,6 +10,15 @@ pub struct Cmyk {
 }
 
 impl Cmyk {
+    /// Create a new CYMK color.
+    /// 
+    /// `c`: cyan component (0 to 1)
+    /// 
+    /// `m`: magenta component (0 to 1)
+    /// 
+    /// `y`: yellow component (0 to 1)
+    /// 
+    /// `k`: key (black) component (0 to 1)
     pub fn new(c: f64, m: f64, y: f64, k: f64) -> Self {
         Self { c, m, y, k }
     }

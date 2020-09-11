@@ -1,5 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
 
+/// A CIE YXY color.
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Yxy {
     pub y1: f64,

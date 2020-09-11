@@ -1,5 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
 
+/// A Hunter Lab color.
 #[derive(Copy, Clone, Debug, Default)]
 pub struct HunterLab {
     pub l: f64,
@@ -8,6 +9,13 @@ pub struct HunterLab {
 }
 
 impl HunterLab {
+    /// Create a new HunterLab color.
+    /// 
+    /// `l`: lightness component (0 to 100)
+    /// 
+    /// `a`: green (negative) and red (positive) component.
+    /// 
+    /// `b`: blue (negative) and yellow (positive) component.
     pub fn new(l: f64, a: f64, b: f64) -> Self {
         Self { l, a, b }
     }

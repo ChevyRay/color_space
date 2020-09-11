@@ -1,6 +1,7 @@
 use crate::{ Rgb, FromRgb, ToRgb, Lab, approx };
 use std::f64::consts::PI;
 
+/// An LCH color (luminance, chroma, hue).
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Lch {
     pub l: f64,
@@ -9,6 +10,13 @@ pub struct Lch {
 }
 
 impl Lch {
+    /// Create a new CIELAB color.
+    /// 
+    /// `l`: luminance component (0 to 100).
+    /// 
+    /// `c`: chroma component (0 to 100).
+    /// 
+    /// `h`: hue component (0 to 360).
     pub fn new(l: f64, c: f64, h: f64) -> Self {
         Self { l, c, h }
     }

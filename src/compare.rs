@@ -2,18 +2,22 @@ use crate::{ ToRgb, FromColor, Lab, Lch };
 use std::f64::consts::PI;
 
 pub trait CompareEuclidean<T> {
+    /// Compare colors based on their RGB distance.
     fn compare_euclidean(&self, color: &T) -> f64;
 }
 
 pub trait CompareCie1976<T> {
+    /// Compare colors based on their CIE 1976 distance.
     fn compare_cie1976(&self, color: &T) -> f64;
 }
 
 pub trait CompareCie2000<T> {
+    /// Compare colors based on their CIE 2000 distance.
     fn compare_cie2000(&self, color: &T) -> f64;
 }
 
 pub trait CompareCmc<T> {
+    /// Compare colors based on their CMC distance.
     fn compare_cmc(&self, color: &T) -> f64;
 }
 

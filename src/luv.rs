@@ -1,5 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
 
+/// A CIELUV color (luminance, )
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Luv {
     pub l: f64,
@@ -8,6 +9,13 @@ pub struct Luv {
 }
 
 impl Luv {
+    /// Create a new CIELUV color.
+    /// 
+    /// `l`: luminance component (0 to 100).
+    /// 
+    /// `u`: coordinate (-134 to 220).
+    /// 
+    /// `v`: coordinate (-140 to 122).
     pub fn new(l: f64, u: f64, v: f64) -> Self {
         Self { l, u, v }
     }

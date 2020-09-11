@@ -1,5 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, approx };
 
+/// An HSV color (hue, saturation, value).
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Hsv {
     pub h: f64,
@@ -8,6 +9,13 @@ pub struct Hsv {
 }
 
 impl Hsv {
+    /// Create a new HSV color.
+    /// 
+    /// `h`: hue component (0 to 360)
+    /// 
+    /// `s`: saturation component (0 to 1)
+    /// 
+    /// `v`: value component (0 to 1)
     pub fn new(h: f64, s: f64, v: f64) -> Self {
         Self { h, s, v }
     }

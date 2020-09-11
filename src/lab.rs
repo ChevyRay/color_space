@@ -1,5 +1,6 @@
 use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
 
+/// A CIELAB color.
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Lab {
     pub l: f64,
@@ -8,6 +9,13 @@ pub struct Lab {
 }
 
 impl Lab {
+    /// Create a new CIELAB color.
+    /// 
+    /// `l`: lightness component (0 to 100)
+    /// 
+    /// `a`: green (negative) and red (positive) component.
+    /// 
+    /// `b`: blue (negative) and yellow (positive) component.
     pub fn new(l: f64, a: f64, b: f64) -> Self {
         Self { l, a, b }
     }

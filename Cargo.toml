@@ -1,6 +1,6 @@
 [package]
 name = "color_space"
-version = "0.4.0"
+version = "0.4.1"
 authors = ["Chevy Ray Johnston <happytrash@gmail.com>"]
 edition = "2018"
 description = "library for converting between color spaces and comparing colors"

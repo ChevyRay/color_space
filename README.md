@@ -1,4 +1,3 @@
-# color_space
 A Rust library for converting between color spaces and comparing colors, ported from https://github.com/berendeanicolae/ColorSpace.
 
 ## Color Conversion

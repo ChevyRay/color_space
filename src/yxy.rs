@@ -9,6 +9,7 @@ pub struct Yxy {
 }
 
 impl Yxy {
+    #[inline]
     pub fn new(y1: f64, x: f64, y2: f64) -> Self {
         Self { y1, x, y2 }
     }

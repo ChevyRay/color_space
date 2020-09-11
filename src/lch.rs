@@ -17,6 +17,7 @@ impl Lch {
     /// `c`: chroma component (0 to 100).
     /// 
     /// `h`: hue component (0 to 360).
+    #[inline]
     pub fn new(l: f64, c: f64, h: f64) -> Self {
         Self { l, c, h }
     }

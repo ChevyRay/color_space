@@ -16,6 +16,7 @@ impl Hsl {
     /// `s`: saturation component (0 to 100)
     /// 
     /// `l`: light component (0 to 100)
+    #[inline]
     pub fn new(h: f64, s: f64, l: f64) -> Self {
         Self { h, s, l }
     }

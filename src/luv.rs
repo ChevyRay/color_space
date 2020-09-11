@@ -16,6 +16,7 @@ impl Luv {
     /// `u`: coordinate (-134 to 220).
     /// 
     /// `v`: coordinate (-140 to 122).
+    #[inline]
     pub fn new(l: f64, u: f64, v: f64) -> Self {
         Self { l, u, v }
     }

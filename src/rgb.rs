@@ -16,10 +16,11 @@ impl Rgb {
     /// `g`: green component (0 to 255).
     /// 
     /// `b`: blue component (0 to 255).
+    #[inline]
     pub fn new(r: f64, g: f64, b: f64) -> Self {
         Self { r, g, b }
     }
-    
+
     /// Create a new RGB color from the `hex` value.
     /// 
     /// ```let cyan = Rgb::from_hex(0x00ffff);```

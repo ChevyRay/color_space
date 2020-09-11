@@ -27,14 +27,17 @@ pub use approx::approx;
 pub use compare::{ CompareEuclidean, CompareCie1976, CompareCie2000, CompareCmc };
 
 pub trait FromRgb {
+    /// Convert from an `Rgb` color.
     fn from_rgb(rgb: &Rgb) -> Self;
 }
 
 pub trait ToRgb {
+    /// Convert into an `Rgb` color.
     fn to_rgb(&self) -> Rgb;
 }
 
 pub trait FromColor<T: ToRgb> {
+    /// Convert from another color space `T`.
     fn from_color(color: &T) -> Self;
 }
 

@@ -16,6 +16,7 @@ impl HunterLab {
     /// `a`: green (negative) and red (positive) component.
     /// 
     /// `b`: blue (negative) and yellow (positive) component.
+    #[inline]
     pub fn new(l: f64, a: f64, b: f64) -> Self {
         Self { l, a, b }
     }

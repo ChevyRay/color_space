@@ -1,5 +1,4 @@
-//! # color_space
-//! A Rust library for converting between color spaces and comparing colors, ported from https://github.com/berendeanicolae/ColorSpace.
+//! A library for converting between color spaces and comparing colors, ported from https://github.com/berendeanicolae/ColorSpace.
 //! 
 //! ## Color Conversion
 //! You can convert between any supported color spaces using the `from` trait method:
@@ -19,7 +18,7 @@
 //! ## Comparing Colors
 //! You can compare colors by using the `compare_*` methods:
 //! ```rust
-//! //! let rgb = Rgb::new(255.0, 0.0, 0.0);
+//! let rgb = Rgb::new(255.0, 0.0, 0.0);
 //! let hsv = Hsv::new(0.0, 1.0, 1.0);
 //! let diff = rgb.compare_cie2000(&hsv);
 //! assert_eq!(diff, 0.0);
@@ -51,7 +50,7 @@ pub use luv::Luv;
 pub use rgb::Rgb;
 pub use xyz::Xyz;
 pub use yxy::Yxy;
-pub use approx::approx;
+pub(crate) use approx::approx;
 pub use compare::{ CompareEuclidean, CompareCie1976, CompareCie2000, CompareCmc };
 
 pub trait FromRgb {

@@ -44,3 +44,6 @@ assert_eq!(diff, 0.0);
 * CIE1976
 * CIE2000
 * CMC
+
+## Contibutions
+I'm happy to take feedback and improvements on the API if there's ways it can be improved. I need to write more tests to check the quality of the conversion outputs as well, but they are tedious to write so I'm currently procrastinating on that.

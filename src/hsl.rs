@@ -40,7 +40,7 @@ impl FromRgb for Hsl {
         let delta = max - min;
         let l = (max + min) / 2.0;
         match delta == 0.0 {
-            true => Self::new(0.0, 0.0, l * 100.0),
+            true => Self::new(0.0, 0.0, l),
             false => {
                 let s = match l < 0.5 {
                     true => delta / (max + min),
@@ -55,8 +55,8 @@ impl FromRgb for Hsl {
                 };
                 Self::new(
                     (h * 60.0 + 360.0) % 360.0,
-                    s * 100.0,
-                    l * 100.0
+                    s,
+                    l
                 )
             }
         }
@@ -78,7 +78,7 @@ fn hue_to_rgb(v1: f64, v2: f64, vh: f64) -> f64 {
 
 impl ToRgb for Hsl {
     fn to_rgb(&self) -> Rgb {
-        let l = self.l / 100.0;
+        let l = self.l;
         match self.s == 0.0 {
             true => {
                 Rgb::new(
@@ -89,7 +89,7 @@ impl ToRgb for Hsl {
             }
             false => {
                 let h = self.h / 360.0;
-                let s = self.s / 100.0;
+                let s = self.s;
                 
                 let temp2 = if l < 0.5 { l * (1.0 + s) } else { l + s - (s * l) };
                 let temp1 = 2.0 * l - temp2;

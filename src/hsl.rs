@@ -1,4 +1,4 @@
-use crate::{ Rgb, FromRgb, ToRgb, approx };
+use crate::{approx, FromRgb, Rgb, ToRgb};
 
 /// An HSL color (hue, saturation, light).
 #[derive(Copy, Clone, Debug, Default)]
@@ -10,11 +10,11 @@ pub struct Hsl {
 
 impl Hsl {
     /// Create a new HSL color.
-    /// 
+    ///
     /// `h`: hue component (0 to 360)
-    /// 
+    ///
     /// `s`: saturation component (0 to 100)
-    /// 
+    ///
     /// `l`: light component (0 to 100)
     #[inline]
     pub fn new(h: f64, s: f64, l: f64) -> Self {
@@ -24,42 +24,35 @@ impl Hsl {
 
 impl PartialEq for Hsl {
     fn eq(&self, other: &Self) -> bool {
-        approx(self.h, other.h) &&
-        approx(self.s, other.s) &&
-        approx(self.l, other.l)
+        approx(self.h, other.h) && approx(self.s, other.s) && approx(self.l, other.l)
     }
 }
 
 impl FromRgb for Hsl {
     fn from_rgb(rgb: &Rgb) -> Self {
-        let r = rgb.r / 255.0;
-        let g = rgb.g / 255.0;
-        let b = rgb.b / 255.0;
-        let min = r.min(g.min(b));
-        let max = r.max(g.max(b));
-        let delta = max - min;
-        let l = (max + min) / 2.0;
-        match delta == 0.0 {
-            true => Self::new(0.0, 0.0, l),
-            false => {
-                let s = match l < 0.5 {
-                    true => delta / (max + min),
-                    false => delta / (1.0 - (2.0 * l - 1.0).abs()),
-                };
-                let h = if r == max {
-                    (g - b) / delta
-                } else if g == max {
-                    (b - r) / delta + 2.0
-                } else {
-                    (r - g) / delta + 4.0
-                };
-                Self::new(
-                    (h * 60.0 + 360.0) % 360.0,
-                    s,
-                    l
-                )
-            }
-        }
+        let (red, green, blue) = (rgb.r, rgb.g, rgb.b);
+        let min = red.min(green).min(blue);
+        let max = red.max(green).max(blue);
+        let chroma = max - min;
+        let lightness = (max + min) / 2.0;
+
+        let hue = if chroma == 0.0 {
+            0.0
+        } else if max == red {
+            (green - blue) / chroma % 6.0
+        } else if max == green {
+            (blue - red) / chroma + 2.0
+        } else {
+            (red - green) / chroma + 4.0
+        } * 60.0;
+
+        let saturation = if chroma == 0.0 || lightness == 0.0 || lightness == 1.0 {
+            0.0
+        } else {
+            (max - lightness) / lightness.min(1.0 - lightness)
+        };
+
+        Self::new(hue, saturation, lightness)
     }
 }
 
@@ -80,23 +73,21 @@ impl ToRgb for Hsl {
     fn to_rgb(&self) -> Rgb {
         let l = self.l;
         match self.s == 0.0 {
-            true => {
-                Rgb::new(
-                    l * 255.0,
-                    l * 255.0,
-                    l * 255.0
-                )
-            }
+            true => Rgb::new(l * 255.0, l * 255.0, l * 255.0),
             false => {
                 let h = self.h / 360.0;
                 let s = self.s;
-                
-                let temp2 = if l < 0.5 { l * (1.0 + s) } else { l + s - (s * l) };
+
+                let temp2 = if l < 0.5 {
+                    l * (1.0 + s)
+                } else {
+                    l + s - (s * l)
+                };
                 let temp1 = 2.0 * l - temp2;
                 Rgb::new(
                     255.0 * hue_to_rgb(temp1, temp2, h + 1.0 / 3.0),
                     255.0 * hue_to_rgb(temp1, temp2, h),
-                    255.0 * hue_to_rgb(temp1, temp2, h - 1.0 / 3.0)
+                    255.0 * hue_to_rgb(temp1, temp2, h - 1.0 / 3.0),
                 )
             }
         }

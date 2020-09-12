@@ -56,40 +56,30 @@ impl FromRgb for Hsl {
     }
 }
 
-fn hue_to_rgb(v1: f64, v2: f64, vh: f64) -> f64 {
-    let vh = (vh + 1.0) % 1.0;
-    if 6.0 * vh < 1.0 {
-        v1 + (v2 - v1) * 6.0 * vh
-    } else if 2.0 * vh < 1.0 {
-        v2
-    } else if 3.0 * vh < 2.0 {
-        v1 + (v2 - v1) * (2.0 / 3.0 - vh) * 6.0
-    } else {
-        v1
-    }
-}
-
 impl ToRgb for Hsl {
     fn to_rgb(&self) -> Rgb {
-        let l = self.l;
-        match self.s == 0.0 {
-            true => Rgb::new(l * 255.0, l * 255.0, l * 255.0),
-            false => {
-                let h = self.h / 360.0;
-                let s = self.s;
+        let (hue, saturation, lightness) = (self.h, self.s, self.l);
 
-                let temp2 = if l < 0.5 {
-                    l * (1.0 + s)
-                } else {
-                    l + s - (s * l)
-                };
-                let temp1 = 2.0 * l - temp2;
-                Rgb::new(
-                    255.0 * hue_to_rgb(temp1, temp2, h + 1.0 / 3.0),
-                    255.0 * hue_to_rgb(temp1, temp2, h),
-                    255.0 * hue_to_rgb(temp1, temp2, h - 1.0 / 3.0),
-                )
-            }
-        }
+        let mut chroma = (1.0 - (2.0 * lightness - 1.0).abs()) * saturation * 255.0;
+        let mut x = chroma * (1.0 - (hue / 60.0 % 2.0 - 1.0).abs());
+        let min = lightness * 255.0 - chroma / 2.0;
+        chroma += min;
+        x += min;
+
+        let (red, green, blue) = if hue <= 60.0 {
+            (chroma, x, min)
+        } else if hue <= 120.0 {
+            (x, chroma, min)
+        } else if hue <= 180.0 {
+            (min, chroma, x)
+        } else if hue <= 240.0 {
+            (min, x, chroma)
+        } else if hue <= 300.0 {
+            (x, min, chroma)
+        } else {
+            (chroma, min, x)
+        };
+
+        Rgb::new(red, green, blue)
     }
 }

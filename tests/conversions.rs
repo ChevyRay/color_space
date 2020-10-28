@@ -11,6 +11,15 @@ where
     assert_eq!(a, b);
 }
 
+
+#[test]
+fn test_convert_rgb_hsl() {
+    test_conversion(
+        Rgb::new(192.0, 128.0, 64.0),
+        Hsl::new(30.000002668239098, 0.503937030107964, 0.5019607916766522)
+    );
+}
+
 #[test]
 fn test_convert_cmy_cmy() {
     test_conversion(

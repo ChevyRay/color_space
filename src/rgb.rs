@@ -26,9 +26,9 @@ impl Rgb {
     /// ```let cyan = Rgb::from_hex(0x00ffff);```
     pub fn from_hex(hex: u32) -> Self {
         Self {
-            r: (((hex >> 16) & 0xff) as f64) / 255.0,
-            g: (((hex >> 8) & 0xff) as f64) / 255.0,
-            b: ((hex & 0xff) as f64) / 255.0,
+            r: (((hex >> 16) & 0xff) as f64),
+            g: (((hex >> 8) & 0xff) as f64),
+            b: ((hex & 0xff) as f64)
         }
     }
 }

@@ -30,7 +30,9 @@ impl PartialEq for Hsl {
 
 impl FromRgb for Hsl {
     fn from_rgb(rgb: &Rgb) -> Self {
-        let (red, green, blue) = (rgb.r, rgb.g, rgb.b);
+        let red = rgb.r / 255.0;
+        let green = rgb.g / 255.0;
+        let blue = rgb.b / 255.0;
         let min = red.min(green).min(blue);
         let max = red.max(green).max(blue);
         let chroma = max - min;

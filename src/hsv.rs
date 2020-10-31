@@ -1,4 +1,4 @@
-use crate::{ Rgb, FromRgb, ToRgb, approx };
+use crate::{approx, FromRgb, Rgb, ToRgb};
 
 /// An HSV color (hue, saturation, value).
 #[derive(Copy, Clone, Debug, Default)]
@@ -10,11 +10,11 @@ pub struct Hsv {
 
 impl Hsv {
     /// Create a new HSV color.
-    /// 
+    ///
     /// `h`: hue component (0 to 360)
-    /// 
+    ///
     /// `s`: saturation component (0 to 1)
-    /// 
+    ///
     /// `v`: value component (0 to 1)
     #[inline]
     pub fn new(h: f64, s: f64, v: f64) -> Self {
@@ -24,9 +24,7 @@ impl Hsv {
 
 impl PartialEq for Hsv {
     fn eq(&self, other: &Self) -> bool {
-        approx(self.h, other.h) &&
-        approx(self.s, other.s) &&
-        approx(self.v, other.v)
+        approx(self.h, other.h) && approx(self.s, other.s) && approx(self.v, other.v)
     }
 }
 

@@ -1,3 +1,5 @@
+#![allow(clippy::excessive_precision)]
+
 use color_space::*;
 use std::fmt::*;
 
@@ -15,7 +17,7 @@ where
 fn test_convert_cmy_cmy() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Cmy::new(0.72549, 0.49020, 0.29412)
+        Cmy::new(0.72549, 0.49020, 0.29412),
     );
 }
 
@@ -23,7 +25,12 @@ fn test_convert_cmy_cmy() {
 fn test_convert_cmy_cmyk() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Cmyk::new(0.61110953703179, 0.2777809259364198, 0.0, 0.29411999999999994)
+        Cmyk::new(
+            0.61110953703179,
+            0.2777809259364198,
+            0.0,
+            0.29411999999999994,
+        ),
     );
 }
 
@@ -31,7 +38,7 @@ fn test_convert_cmy_cmyk() {
 fn test_convert_cmy_hsl() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Hsl::new(207.5229325111681, 0.4377509842266802, 0.48823530083777854)
+        Hsl::new(207.5229325111681, 0.4377509842266802, 0.48823530083777854),
     );
 }
 
@@ -39,7 +46,7 @@ fn test_convert_cmy_hsl() {
 fn test_convert_cmy_hsv() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Hsv::new(207.5229325111681, 0.61110953703179, 0.7058800000000001)
+        Hsv::new(207.5229325111681, 0.61110953703179, 0.7058800000000001),
     );
 }
 
@@ -47,7 +54,7 @@ fn test_convert_cmy_hsv() {
 fn test_convert_cmy_hunterlab() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        HunterLab::new(45.345731409137045, -5.561074840212549, -28.61341564730304)
+        HunterLab::new(45.345731409137045, -5.561074840212549, -28.61341564730304),
     );
 }
 
@@ -55,7 +62,7 @@ fn test_convert_cmy_hunterlab() {
 fn test_convert_cmy_lab() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Lab::new(52.467, -4.070, -32.198)
+        Lab::new(52.467, -4.070, -32.198),
     );
 }
 
@@ -63,7 +70,7 @@ fn test_convert_cmy_lab() {
 fn test_convert_cmy_lch() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Lch::new(52.467152054850615, 32.4544987607236, 262.79619174958583)
+        Lch::new(52.467152054850615, 32.4544987607236, 262.79619174958583),
     );
 }
 
@@ -71,7 +78,7 @@ fn test_convert_cmy_lch() {
 fn test_convert_cmy_luv() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Luv::new(52.467152054850615, -25.10699263443856, -48.3742052452972)
+        Luv::new(52.467152054850615, -25.10699263443856, -48.3742052452972),
     );
 }
 
@@ -79,7 +86,7 @@ fn test_convert_cmy_luv() {
 fn test_convert_cmy_rgb() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Rgb::new(70.0, 130.0, 180.0)
+        Rgb::new(70.0, 130.0, 180.0),
     );
 }
 
@@ -87,7 +94,7 @@ fn test_convert_cmy_rgb() {
 fn test_convert_cmy_xyz() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Xyz::new(18.74644744398548, 20.56235357029598, 46.16058375040178)
+        Xyz::new(18.74644744398548, 20.56235357029598, 46.16058375040178),
     );
 }
 
@@ -95,6 +102,6 @@ fn test_convert_cmy_xyz() {
 fn test_convert_cmy_yxy() {
     test_conversion(
         Cmy::new(0.72549, 0.49020, 0.29412),
-        Yxy::new(20.56235357029598, 0.2193352332604094, 0.24058150912059142)
+        Yxy::new(20.56235357029598, 0.2193352332604094, 0.24058150912059142),
     );
 }

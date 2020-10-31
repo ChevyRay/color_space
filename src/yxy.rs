@@ -1,4 +1,4 @@
-use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
+use crate::{approx, FromRgb, Rgb, ToRgb, Xyz};
 
 /// A CIE YXY color.
 #[derive(Copy, Clone, Debug, Default)]
@@ -17,9 +17,7 @@ impl Yxy {
 
 impl PartialEq for Yxy {
     fn eq(&self, other: &Self) -> bool {
-        approx(self.y1, other.y1) &&
-        approx(self.x, other.x) &&
-        approx(self.y2, other.y2)
+        approx(self.y1, other.y1) && approx(self.x, other.x) && approx(self.y2, other.y2)
     }
 }
 
@@ -39,7 +37,8 @@ impl ToRgb for Yxy {
         Xyz::new(
             self.x * (self.y1 / self.y2),
             self.y1,
-            (1.0 - self.x - self.y2) * (self.y1 / self.y2)
-        ).to_rgb()
+            (1.0 - self.x - self.y2) * (self.y1 / self.y2),
+        )
+        .to_rgb()
     }
 }

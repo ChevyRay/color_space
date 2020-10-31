@@ -1,5 +1,5 @@
-use crate::{ FromRgb, ToRgb, approx };
 use crate::rgb::Rgb;
+use crate::{approx, FromRgb, ToRgb};
 
 /// A CIE 1931 XYZ color.
 #[derive(Copy, Clone, Debug, Default)]
@@ -18,9 +18,7 @@ impl Xyz {
 
 impl PartialEq for Xyz {
     fn eq(&self, other: &Self) -> bool {
-        approx(self.x, other.x) &&
-        approx(self.y, other.y) &&
-        approx(self.z, other.z)
+        approx(self.x, other.x) && approx(self.y, other.y) && approx(self.z, other.z)
     }
 }
 
@@ -40,7 +38,7 @@ impl FromRgb for Xyz {
         Self::new(
             (0.4124 * r + 0.3576 * g + 0.1805 * b) * 100.0,
             (0.2126 * r + 0.7152 * g + 0.0722 * b) * 100.0,
-            (0.0193 * r + 0.1192 * g + 0.9505 * b) * 100.0
+            (0.0193 * r + 0.1192 * g + 0.9505 * b) * 100.0,
         )
         /*let r = rgb.r / 255.0;
         let g = rgb.g / 255.0;
@@ -64,9 +62,24 @@ impl ToRgb for Xyz {
         let r = x * 3.2404542 + y * -1.5371385 + z * -0.4985314;
         let g = x * -0.9692660 + y * 1.8760108 + z * 0.0415560;
         let b = x * 0.0556434 + y * -0.2040259 + z * 1.0572252;
-        let r = 255.0 * if r > 0.0031308 { 1.055 * r.powf(1.0 / 2.4) - 0.055 } else { 12.92 * r };
-        let g = 255.0 * if g > 0.0031308 { 1.055 * g.powf(1.0 / 2.4) - 0.055 } else { 12.92 * g };
-        let b = 255.0 * if b > 0.0031308 { 1.055 * b.powf(1.0 / 2.4) - 0.055 } else { 12.92 * b };
+        let r = 255.0
+            * if r > 0.0031308 {
+                1.055 * r.powf(1.0 / 2.4) - 0.055
+            } else {
+                12.92 * r
+            };
+        let g = 255.0
+            * if g > 0.0031308 {
+                1.055 * g.powf(1.0 / 2.4) - 0.055
+            } else {
+                12.92 * g
+            };
+        let b = 255.0
+            * if b > 0.0031308 {
+                1.055 * b.powf(1.0 / 2.4) - 0.055
+            } else {
+                12.92 * b
+            };
         Rgb::new(r, g, b)
     }
 }

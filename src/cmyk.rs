@@ -38,7 +38,7 @@ impl FromRgb for Cmyk {
     fn from_rgb(rgb: &Rgb) -> Self {
         let cmy = Cmy::from_rgb(rgb);
         let k = cmy.c.min(cmy.m.min(cmy.y.min(1.0)));
-        match (k - 1.0) < 1e-3 {
+        match (k - 1.0).abs() < 1e-3 {
             true => Self::new(0.0, 0.0, 0.0, k),
             false => Self::new(
                 (cmy.c - k) / (1.0 - k),

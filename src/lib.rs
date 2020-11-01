@@ -1,5 +1,5 @@
 //! A library for converting between color spaces and comparing colors, ported from https://github.com/berendeanicolae/ColorSpace.
-//! 
+//!
 //! ## Color Conversion
 //! You can convert between any supported color spaces using the `from` trait method:
 //! ```rust
@@ -8,7 +8,7 @@
 //! let hsv = Hsv::from(rgb);
 //! assert_eq!(hsv, Hsv::new(120.0, 1.0, 1.0));
 //! ```
-//! 
+//!
 //! You can also do this generically with the `from_color` method:
 //! ```rust
 //! use color_space::{Rgb, Hsv, FromColor};
@@ -16,7 +16,7 @@
 //! let hsv = Hsv::from_color(&rgb);
 //! assert_eq!(hsv, Hsv::new(240.0, 1.0, 1.0));
 //! ```
-//! 
+//!
 //! ## Comparing Colors
 //! You can compare colors by using the `compare_*` methods:
 //! ```rust
@@ -28,8 +28,13 @@
 //! // these two colors are the same, so the difference is zero
 //! ```
 
+#![deny(unsafe_code)]
+#![allow(clippy::float_cmp, clippy::many_single_char_names)]
+
+mod approx;
 mod cmy;
 mod cmyk;
+mod compare;
 mod hsl;
 mod hsv;
 mod hunter_lab;
@@ -39,11 +44,11 @@ mod luv;
 mod rgb;
 mod xyz;
 mod yxy;
-mod approx;
-mod compare;
 
+pub(crate) use approx::approx;
 pub use cmy::Cmy;
 pub use cmyk::Cmyk;
+pub use compare::{CompareCie1976, CompareCie2000, CompareCmc, CompareEuclidean};
 pub use hsl::Hsl;
 pub use hsv::Hsv;
 pub use hunter_lab::HunterLab;
@@ -53,8 +58,6 @@ pub use luv::Luv;
 pub use rgb::Rgb;
 pub use xyz::Xyz;
 pub use yxy::Yxy;
-pub(crate) use approx::approx;
-pub use compare::{ CompareEuclidean, CompareCie1976, CompareCie2000, CompareCmc };
 
 pub trait FromRgb {
     /// Convert from an `Rgb` color.

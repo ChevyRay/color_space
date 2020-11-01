@@ -1,4 +1,4 @@
-use crate::{ Rgb, FromRgb, ToRgb, Cmy, approx };
+use crate::{approx, Cmy, FromRgb, Rgb, ToRgb};
 
 /// A CMYK color (cyan, magenta, yellow, key).
 #[derive(Copy, Clone, Debug, Default)]
@@ -11,13 +11,13 @@ pub struct Cmyk {
 
 impl Cmyk {
     /// Create a new CYMK color.
-    /// 
+    ///
     /// `c`: cyan component (0 to 1)
-    /// 
+    ///
     /// `m`: magenta component (0 to 1)
-    /// 
+    ///
     /// `y`: yellow component (0 to 1)
-    /// 
+    ///
     /// `k`: key (black) component (0 to 1)
     #[inline]
     pub fn new(c: f64, m: f64, y: f64, k: f64) -> Self {
@@ -27,10 +27,10 @@ impl Cmyk {
 
 impl PartialEq for Cmyk {
     fn eq(&self, other: &Self) -> bool {
-        approx(self.c, other.c) &&
-        approx(self.m, other.m) &&
-        approx(self.y, other.y) &&
-        approx(self.k, other.k) 
+        approx(self.c, other.c)
+            && approx(self.m, other.m)
+            && approx(self.y, other.y)
+            && approx(self.k, other.k)
     }
 }
 
@@ -44,8 +44,8 @@ impl FromRgb for Cmyk {
                 (cmy.c - k) / (1.0 - k),
                 (cmy.m - k) / (1.0 - k),
                 (cmy.y - k) / (1.0 - k),
-                k
-            )
+                k,
+            ),
         }
     }
 }
@@ -55,7 +55,8 @@ impl ToRgb for Cmyk {
         Cmy::new(
             self.c * (1.0 - self.k) + self.k,
             self.m * (1.0 - self.k) + self.k,
-            self.y * (1.0 - self.k) + self.k
-        ).to_rgb()
+            self.y * (1.0 - self.k) + self.k,
+        )
+        .to_rgb()
     }
 }

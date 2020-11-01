@@ -1,4 +1,4 @@
-use crate::{ FromRgb, ToRgb, approx };
+use crate::{approx, FromRgb, ToRgb};
 
 /// An RGB color (red, green, blue).
 #[derive(Copy, Clone, Debug, Default)]
@@ -10,11 +10,11 @@ pub struct Rgb {
 
 impl Rgb {
     /// Create a new RGB color.
-    /// 
+    ///
     /// `r`: red component (0 to 255).
-    /// 
+    ///
     /// `g`: green component (0 to 255).
-    /// 
+    ///
     /// `b`: blue component (0 to 255).
     #[inline]
     pub fn new(r: f64, g: f64, b: f64) -> Self {
@@ -22,7 +22,7 @@ impl Rgb {
     }
 
     /// Create a new RGB color from the `hex` value.
-    /// 
+    ///
     /// ```let cyan = Rgb::from_hex(0x00ffff);```
     pub fn from_hex(hex: u32) -> Self {
         Self {
@@ -35,9 +35,7 @@ impl Rgb {
 
 impl PartialEq for Rgb {
     fn eq(&self, other: &Self) -> bool {
-        approx(self.r, other.r) &&
-        approx(self.g, other.g) &&
-        approx(self.b, other.b)
+        approx(self.r, other.r) && approx(self.g, other.g) && approx(self.b, other.b)
     }
 }
 

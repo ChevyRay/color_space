@@ -1,4 +1,4 @@
-use crate::{ Rgb, FromRgb, ToRgb, Xyz, approx };
+use crate::{approx, FromRgb, Rgb, ToRgb, Xyz};
 
 /// A CIELUV color (luminance, )
 #[derive(Copy, Clone, Debug, Default)]
@@ -10,11 +10,11 @@ pub struct Luv {
 
 impl Luv {
     /// Create a new CIELUV color.
-    /// 
+    ///
     /// `l`: luminance component (0 to 100).
-    /// 
+    ///
     /// `u`: coordinate (-134 to 220).
-    /// 
+    ///
     /// `v`: coordinate (-140 to 122).
     #[inline]
     pub fn new(l: f64, u: f64, v: f64) -> Self {
@@ -24,27 +24,28 @@ impl Luv {
 
 impl PartialEq for Luv {
     fn eq(&self, other: &Self) -> bool {
-        approx(self.l, other.l) &&
-        approx(self.u, other.u) &&
-        approx(self.v, other.v)
+        approx(self.l, other.l) && approx(self.u, other.u) && approx(self.v, other.v)
     }
 }
 
 const EPS: f64 = 216.0 / 24389.0;
 const KAPPA: f64 = 24389.0 / 27.0;
-const WHITE: Xyz = Xyz{ x: 95.047, y: 100.000, z: 108.883 };
+const WHITE: Xyz = Xyz {
+    x: 95.047,
+    y: 100.000,
+    z: 108.883,
+};
 
 impl FromRgb for Luv {
     fn from_rgb(rgb: &Rgb) -> Self {
-
         let xyz = Xyz::from_rgb(rgb);
         let y = xyz.y / WHITE.y;
         let temp = xyz.x + 15.0 * xyz.y + 3.0 * xyz.z;
         let tempr = WHITE.x + 15.0 * WHITE.y + 3.0 * WHITE.z;
-        
+
         let l = match y > EPS {
             true => 116.0 * y.cbrt() - 16.0,
-            false => KAPPA * y
+            false => KAPPA * y,
         };
 
         let (u, v) = match temp > 1e-3 {
@@ -55,7 +56,7 @@ impl FromRgb for Luv {
         Self::new(
             l,
             52.0 * l * (u - WHITE.x / tempr),
-            117.0 * l * (v - WHITE.y / tempr)
+            117.0 * l * (v - WHITE.y / tempr),
         )
     }
 }

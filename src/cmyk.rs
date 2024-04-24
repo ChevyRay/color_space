@@ -20,7 +20,7 @@ impl Cmyk {
     /// 
     /// `k`: key (black) component (0 to 1)
     #[inline]
-    pub fn new(c: f64, m: f64, y: f64, k: f64) -> Self {
+    pub const fn new(c: f64, m: f64, y: f64, k: f64) -> Self {
         Self { c, m, y, k }
     }
 }

@@ -17,14 +17,14 @@ impl Rgb {
     /// 
     /// `b`: blue component (0 to 255).
     #[inline]
-    pub fn new(r: f64, g: f64, b: f64) -> Self {
+    pub const fn new(r: f64, g: f64, b: f64) -> Self {
         Self { r, g, b }
     }
 
     /// Create a new RGB color from the `hex` value.
     /// 
     /// ```let cyan = Rgb::from_hex(0x00ffff);```
-    pub fn from_hex(hex: u32) -> Self {
+    pub const fn from_hex(hex: u32) -> Self {
         Self {
             r: (((hex >> 16) & 0xff) as f64),
             g: (((hex >> 8) & 0xff) as f64),

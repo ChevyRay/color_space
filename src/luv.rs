@@ -17,7 +17,7 @@ impl Luv {
     /// 
     /// `v`: coordinate (-140 to 122).
     #[inline]
-    pub fn new(l: f64, u: f64, v: f64) -> Self {
+    pub const fn new(l: f64, u: f64, v: f64) -> Self {
         Self { l, u, v }
     }
 }

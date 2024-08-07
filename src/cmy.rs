@@ -17,7 +17,7 @@ impl Cmy {
     /// 
     /// `y`: yellow component (0 to 1)
     #[inline]
-    pub fn new(c: f64, m: f64, y: f64) -> Self {
+    pub const fn new(c: f64, m: f64, y: f64) -> Self {
         Self { c, m, y }
     }
 }
